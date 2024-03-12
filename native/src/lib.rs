@@ -17,4 +17,4 @@ fn load(env: Env, _: Term) -> bool {
     true
 }
 
-rustler::init!("libsql_nif", [], load = load);
+rustler::init!("libsql_nif", [builder::start, builder::stop], load = load);

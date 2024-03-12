@@ -1,5 +1,0 @@
-[workspace]
-members = [
-    "crates/libsql_nif"
-]
-resolver = "2"
