@@ -1,16 +1,19 @@
 -module(libsql_nif).
 
--export([init/0, builder_start/0, builder_stop/1]).
+-export([init/0, database_start/0, database_connect_local/2, database_execute/2]).
 
 -on_load init/0.
 
 -define(APPNAME, ?MODULE).
 -define(LIBNAME, "libsql_nif").
 
-builder_start() ->
+database_start() ->
     not_loaded(?LINE).
 
-builder_stop(_) ->
+database_connect_local(_, _) ->
+    not_loaded(?LINE).
+
+database_execute(_, _) ->
     not_loaded(?LINE).
 
 init() -> 
@@ -28,7 +31,6 @@ init() ->
             Dir ->
                 filename:join(Dir, ?LIBNAME)
         end,
-    io:format("~s~n", [SoName]),
     erlang:load_nif(SoName, 0).
 
 not_loaded(Line) ->

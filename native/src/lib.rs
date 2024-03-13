@@ -7,14 +7,16 @@ mod atoms {
     }
 }
 
-mod builder;
 mod database;
 mod task;
 
 fn load(env: Env, _: Term) -> bool {
-    builder::load(env);
     database::load(env);
     true
 }
 
-rustler::init!("libsql_nif", [builder::start, builder::stop], load = load);
+rustler::init!(
+    "libsql_nif",
+    [database::start, database::connect_local, database::execute],
+    load = load
+);
